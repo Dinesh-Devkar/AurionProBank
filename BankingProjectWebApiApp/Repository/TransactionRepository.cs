@@ -22,7 +22,7 @@ namespace BankingProjectWebApiApp.Repository
                 {
                     if (transactionDto.TransactionType == TransactionType.DEPOSIT.ToString())
                     {
-                        //var account=this._bankDb
+                        //var account=this._bankDb the mode of arrangement of sepal or petal just 
                     }
                 }
             }
