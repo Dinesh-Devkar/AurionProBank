@@ -63,7 +63,7 @@ namespace BankingProjectWebApiApp.Controllers
         [HttpPost]
         [Route("LoginAccount")]
         [AllowAnonymous]
-        public IActionResult LoginAccont(AccountLoginRequest account)
+        public IActionResult LoginAccount(AccountLoginRequest account)
         {
             return this.Ok(_accountRepository.AccountLogin(account));
         }
@@ -101,7 +101,7 @@ namespace BankingProjectWebApiApp.Controllers
         }
         [HttpGet]
         [Route("{adminId}/Admin")]
-        [AllowAnonymous]
+        [Authorize(Roles ="A")]
         public List<AccountDto> GetAllAccounts(int adminId)
         {
             return _accountRepository.GetAllAccounts();
