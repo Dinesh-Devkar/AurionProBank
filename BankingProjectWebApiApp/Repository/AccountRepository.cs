@@ -143,7 +143,7 @@ namespace BankingProjectWebApiApp.Repository
                             Debug.WriteLine("Account Added");
                             if (this._bankDb.SaveChanges() > 0)
                             {
-                                this._bankDb.Transactions.Add(new Transaction()
+                                this._bankDb.Transactions.Add(new Transactions()
                                 {
                                     AccountId = account.Id,
                                     Name = account.Name,

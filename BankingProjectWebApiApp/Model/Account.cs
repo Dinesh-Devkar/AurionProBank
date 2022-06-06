@@ -14,6 +14,6 @@ namespace BankingProjectWebApiApp.Model
         public string Password { get; set; }
         [Required]
         public string Roll { get; set; }
-        public List<Transaction> Transactions { get; set; }
+        public List<Transactions> Transactions { get; set; }
     }
 }

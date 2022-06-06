@@ -8,6 +8,6 @@ namespace BankingProjectWebApiApp.Infrastructure
     {
         public BankDbContext(DbContextOptions<BankDbContext> options) : base(options) { }
         public DbSet<Account> Accounts { get; set; }
-        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Transactions> Transactions { get; set; }
     }
 }
