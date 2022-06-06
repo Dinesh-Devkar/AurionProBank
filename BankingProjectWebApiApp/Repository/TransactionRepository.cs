@@ -73,12 +73,14 @@ namespace BankingProjectWebApiApp.Repository
 
         public List<Transactions> GetAllTransactions(int accountId)
         {
-            throw new System.NotImplementedException();
+            var transactions = this._bankDb.Transactions.Where(x => x.AccountId == accountId).ToList();
+            return transactions;
         }
 
         public Transactions GetTransaction(int accountId, int transactionId)
         {
-            throw new System.NotImplementedException();
+            var transaction=this._bankDb.Transactions.ToList().Find(x=>x.AccountId==accountId && x.Id==transactionId);
+            return transaction;
         }
 
        

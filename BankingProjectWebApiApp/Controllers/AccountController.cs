@@ -1,4 +1,5 @@
 ﻿using BankingProjectWebApiApp.Dtos;
+using BankingProjectWebApiApp.Model;
 using BankingProjectWebApiApp.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -14,16 +15,11 @@ namespace BankingProjectWebApiApp.Controllers
     {
         private IAccountRepository _accountRepository;
         private ITransactionRepository _transactionRepository;
-        public AccountController(IAccountRepository accountRepository,ITransactionRepository transactionRepository)
+        public AccountController(IAccountRepository accountRepository, ITransactionRepository transactionRepository)
         {
-            _accountRepository=accountRepository;
-            _transactionRepository=transactionRepository;
+            _accountRepository = accountRepository;
+            _transactionRepository = transactionRepository;
         }
-        //public AccountController(TransactionRepository transactionRepository)
-        //{
-        //    _accountRepository = accountRepository;
-        //    _transactionRepository = transactionRepository;
-        //}
 
         [HttpGet]
         [Route("GetAllAccounts")]
@@ -50,9 +46,9 @@ namespace BankingProjectWebApiApp.Controllers
         [HttpPut]
         [Route("{id}/UpdateAccount")]
         [Authorize]
-        public IActionResult UpdateAccount(int id,AccountDtoUpdate account)
+        public IActionResult UpdateAccount(int id, AccountDtoUpdate account)
         {
-            _accountRepository.UpdateAccount(id,account);
+            _accountRepository.UpdateAccount(id, account);
             return this.Ok("Account Updated Successfully");
         }
         [HttpDelete]
@@ -82,12 +78,35 @@ namespace BankingProjectWebApiApp.Controllers
         [HttpPost]
         [Route("{accountId}/DoTransaction")]
         [Authorize]
-        
+
         public IActionResult DoTransaction(TransactionDto transactionDto, int accountId)
         {
             _transactionRepository.DoTransation(transactionDto, accountId);
             return this.Ok("Transaction Successfull");
         }
+        [HttpGet]
+        [Route("{accountId}/Passbook")]
+        [Authorize]
+        public List<Transactions> GetPassBook(int accountId)
+        {
+            return _transactionRepository.GetAllTransactions(accountId);
+        }
+
+        [HttpGet]
+        [Route("{accountId}/GetTransaction/{transactionId}")]
+        [Authorize]
+        public Transactions GetTransaction(int accountId,int transactionId)
+        {
+            return _transactionRepository.GetTransaction(accountId,transactionId);
+        }
+        [HttpGet]
+        [Route("{adminId}/Admin")]
+        [AllowAnonymous]
+        public List<AccountDto> GetAllAccounts(int adminId)
+        {
+            return _accountRepository.GetAllAccounts();
+        }
+
     }
 
 }
