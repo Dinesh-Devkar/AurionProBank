@@ -33,8 +33,9 @@ namespace BankingProjectWebApiApp
         {
             services.AddControllers();
             services.AddDbContext<BankDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BankDbContextConnectionString")));
-            services.AddScoped<IAccountRepository, AccountRepository>();
 			services.AddScoped<ITransactionRepository, TransactionRepository>();
+			services.AddScoped<IAccountRepository, AccountRepository>();
+			
             services.AddSwaggerGen(opt =>
             {
                 opt.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "BankingProjectWebApiApp", Version = "v1" });

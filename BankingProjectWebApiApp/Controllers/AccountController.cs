@@ -13,10 +13,17 @@ namespace BankingProjectWebApiApp.Controllers
     public class AccountController : ControllerBase
     {
         private IAccountRepository _accountRepository;
-        public AccountController(IAccountRepository repository)
+        private ITransactionRepository _transactionRepository;
+        public AccountController(IAccountRepository accountRepository,ITransactionRepository transactionRepository)
         {
-            _accountRepository=repository;
+            _accountRepository=accountRepository;
+            _transactionRepository=transactionRepository;
         }
+        //public AccountController(TransactionRepository transactionRepository)
+        //{
+        //    _accountRepository = accountRepository;
+        //    _transactionRepository = transactionRepository;
+        //}
 
         [HttpGet]
         [Route("GetAllAccounts")]
@@ -72,5 +79,15 @@ namespace BankingProjectWebApiApp.Controllers
             _accountRepository.Register(account);
             return this.Ok("Account Added Successfully");
         }
+        [HttpPost]
+        [Route("{accountId}/DoTransaction")]
+        [Authorize]
+        
+        public IActionResult DoTransaction(TransactionDto transactionDto, int accountId)
+        {
+            _transactionRepository.DoTransation(transactionDto, accountId);
+            return this.Ok("Transaction Successfull");
+        }
     }
+
 }

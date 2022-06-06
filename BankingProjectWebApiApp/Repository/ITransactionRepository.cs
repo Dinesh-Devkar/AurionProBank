@@ -9,7 +9,7 @@ namespace BankingProjectWebApiApp.Repository
     {
         List<Transactions> GetAllTransactions(int accountId);
         Transactions GetTransaction(int accountId,int transactionId);
-        void DoTransation(TransactionDto transactionDto,AccountDto accountDto);
+        void DoTransation(TransactionDto transactionDto,int accountId);
 
         void DownloadPassbook(int accountId);
 
